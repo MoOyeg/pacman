@@ -5,6 +5,7 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var os = require('os');
+const { http, https } = require('follow-redirects');
 
 // middleware that is specific to this router
 router.use(function timeLog(req, res, next) {

@@ -45,7 +45,7 @@ function getK8sCloudMetadata(callback) {
     // Set options to retrieve k8s api information
     var node_name = process.env.METADATA_NODE_NAME;
     var node_port = process.env.METADATA_NODE_PORT
-    console.log('Querying Cloud Metadata Service at ' + node_name + ' and port ' + node_port + 'for cloud data');
+    console.log('Querying Cloud Metadata Service at ' + node_name + ' and port ' + node_port + ' for cloud data');
 
     var genericOptions = {
         host: `${node_name}`,
@@ -57,7 +57,7 @@ function getK8sCloudMetadata(callback) {
     var cloudName = 'unknown',
         zone = 'unknown';
 
-    var req = https.request(genericOptions, (zoneRes) => {
+    var req = http.request(genericOptions, (zoneRes) => {
         let error;
 
         if (zoneRes.statusCode !== 200) {

@@ -1,6 +1,6 @@
 //code adapted to run with external metadata service -- https://github.com/MoOyeg/kubernetes-cloud-metadata-tool
-var http = require('http');
-var https = require('https');
+//var http = require('http');
+//var https = require('https');
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');

@@ -103,7 +103,7 @@ function getK8sCloudMetadata(callback) {
 
             console.log("Set Zone")
             try {
-                var cloudName = newmetaData.CLOUD_AVAILIBILITY_ZONE;
+                var zone = newmetaData.CLOUD_AVAILIBILITY_ZONE;
              } catch (err) {
                 console.log(err)
                 var zone = "unknown";

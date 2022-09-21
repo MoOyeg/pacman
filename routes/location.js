@@ -85,19 +85,23 @@ function getK8sCloudMetadata(callback) {
         });
         zoneRes.on('end', () => {
             var metaData = JSON.parse(body.join(''));
+            var metaData2 = JSON.parse(body);
             console.log(`RESULT: ${metaData}`);
+            console.log(`Body: ${metaData2}`);
             console.log('No more data in response.');
+            var cloudName = "unknown";
+            var zone = "unknown";
 
-            if (metaData.spec.providerID) {
-                var provider = metaData.spec.providerID;
-                cloudName = String(provider.split(":", 1)); // Split on providerID if request was successful
-            }
+            // if (metaData.spec.providerID) {
+            //     var provider = metaData.spec.providerID;
+            //     cloudName = String(provider.split(":", 1)); // Split on providerID if request was successful
+            // }
 
             // use the annotation  to identify the zone if available
-            if (metaData.metadata.labels['failure-domain.beta.kubernetes.io/zone']) {
-                zone = metaData.metadata.labels['failure-domain.beta.kubernetes.io/zone'].toLowerCase();
+            // if (metaData.metadata.labels['failure-domain.beta.kubernetes.io/zone']) {
+            //     zone = metaData.metadata.labels['failure-domain.beta.kubernetes.io/zone'].toLowerCase();
 
-            }
+            // }
             // return CLOUD and ZONE data
             if (cloudName == "unknown") {
                 error = new Error(`CloudName not found on node Spec`);

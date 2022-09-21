@@ -73,7 +73,7 @@ function getK8sCloudMetadata(callback) {
             callback(error, cloudName, zone);
             return;
         }
-// Sample Response {"CLOUD_PROVIDER":"aws","CLOUD_REGION":"us-east-1","CLOUD_AVAILIBILITY_ZONE":"us-east-1a","CLOUD_INSTANCE_TYPE":"c5.4xlarge","HOSTNAME":"ip-10-0-138-120.ec2.internal"}
+
         console.log(`STATUS: ${zoneRes.statusCode}`);
         console.log(`HEADERS: ${JSON.stringify(zoneRes.headers)}`);
         zoneRes.setEncoding('utf8');
@@ -85,12 +85,29 @@ function getK8sCloudMetadata(callback) {
         });
         zoneRes.on('end', () => {
             var metaData = JSON.parse(body.join(''));
-            var metaData2 = JSON.parse(body);
+            var newmetaData = JSON.parse(body);
             console.log(`RESULT: ${metaData}`);
-            console.log(`Body: ${metaData2}`);
+            console.log(`Body: ${newmetaData}`);
             console.log('No more data in response.');
-            var cloudName = "unknown";
-            var zone = "unknown";
+            
+      
+
+// Sample Response {"CLOUD_PROVIDER":"aws","CLOUD_REGION":"us-east-1","CLOUD_AVAILIBILITY_ZONE":"us-east-1a","CLOUD_INSTANCE_TYPE":"c5.4xlarge","HOSTNAME":"ip-10-0-138-120.ec2.internal"}             
+            console.log("Set CloudName")
+            try {
+                var cloudName = newmetaData.CLOUD_PROVIDER;
+             } catch (err) {
+                console.log(err)
+                var cloudName = "unknown";
+            }
+
+            console.log("Set Zone")
+            try {
+                var cloudName = newmetaData.CLOUD_AVAILIBILITY_ZONE;
+             } catch (err) {
+                console.log(err)
+                var zone = "unknown";
+            }
 
             // if (metaData.spec.providerID) {
             //     var provider = metaData.spec.providerID;
